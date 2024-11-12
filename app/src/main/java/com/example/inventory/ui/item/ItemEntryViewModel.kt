@@ -25,19 +25,19 @@ import com.example.inventory.data.ItemsRepository
 import java.text.NumberFormat
 
 /**
- * ViewModel to validate and insert items in the Room database.
+ * ViewModel untuk memvalidasi dan memasukkan item ke dalam database Room.
  */
 class ItemEntryViewModel(private val itemsRepository: ItemsRepository) : ViewModel() {
 
     /**
-     * Holds current item ui state
+     * Menyimpan state UI item saat ini.
      */
     var itemUiState by mutableStateOf(ItemUiState())
         private set
 
     /**
-     * Updates the [itemUiState] with the value provided in the argument. This method also triggers
-     * a validation for input values.
+     * Memperbarui [itemUiState] dengan nilai yang diberikan dalam argumen. Metode ini juga
+     * memicu validasi untuk nilai input.
      */
     fun updateUiState(itemDetails: ItemDetails) {
         itemUiState =
@@ -45,7 +45,7 @@ class ItemEntryViewModel(private val itemsRepository: ItemsRepository) : ViewMod
     }
 
     /**
-     * Inserts an [Item] in the Room database
+     * Memasukkan sebuah [Item] ke dalam database Room.
      */
     suspend fun saveItem() {
         if (validateInput()) {
@@ -61,7 +61,7 @@ class ItemEntryViewModel(private val itemsRepository: ItemsRepository) : ViewMod
 }
 
 /**
- * Represents Ui State for an Item.
+ * Mewakili state UI untuk sebuah Item.
  */
 data class ItemUiState(
     val itemDetails: ItemDetails = ItemDetails(),
@@ -76,9 +76,9 @@ data class ItemDetails(
 )
 
 /**
- * Extension function to convert [ItemUiState] to [Item]. If the value of [ItemDetails.price] is
- * not a valid [Double], then the price will be set to 0.0. Similarly if the value of
- * [ItemUiState] is not a valid [Int], then the quantity will be set to 0
+ * Fungsi ekstensi untuk mengonversi [ItemUiState] menjadi [Item]. Jika nilai [ItemDetails.price]
+ * bukan [Double] yang valid, maka harga akan diset ke 0.0. Begitu pula jika nilai
+ * [ItemUiState.quantity] bukan [Int] yang valid, maka jumlah akan diset ke 0.
  */
 fun ItemDetails.toItem(): Item = Item(
     id = id,
@@ -92,7 +92,7 @@ fun Item.formatedPrice(): String {
 }
 
 /**
- * Extension function to convert [Item] to [ItemUiState]
+ * Fungsi ekstensi untuk mengonversi [Item] menjadi [ItemUiState].
  */
 fun Item.toItemUiState(isEntryValid: Boolean = false): ItemUiState = ItemUiState(
     itemDetails = this.toItemDetails(),
@@ -100,7 +100,7 @@ fun Item.toItemUiState(isEntryValid: Boolean = false): ItemUiState = ItemUiState
 )
 
 /**
- * Extension function to convert [Item] to [ItemDetails]
+ * Fungsi ekstensi untuk mengonversi [Item] menjadi [ItemDetails].
  */
 fun Item.toItemDetails(): ItemDetails = ItemDetails(
     id = id,

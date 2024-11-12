@@ -25,25 +25,28 @@ import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 /**
- * Database access object to access the Inventory database
+ * Ini berfungsi sebegai perantara antara aplikasi dan database
  */
 @Dao
 interface ItemDao {
 
+//    untuk mengambil semua data dari database
     @Query("SELECT * from items ORDER BY name ASC")
     fun getAllItems(): Flow<List<Item>>
 
+//    Untuk mengambil data berdasarkan id
     @Query("SELECT * from items WHERE id = :id")
     fun getItem(id: Int): Flow<Item>
 
-    // Specify the conflict strategy as IGNORE, when the user tries to add an
-    // existing Item into the database Room ignores the conflict.
+//    untuk memasukkan data ke database
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(item: Item)
 
+//    Untuk melakukan update data ke database
     @Update
     suspend fun update(item: Item)
 
+//    Untuk delete data pada database
     @Delete
     suspend fun delete(item: Item)
 }

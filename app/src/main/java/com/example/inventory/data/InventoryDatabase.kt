@@ -22,7 +22,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 /**
- * Database class with a singleton Instance object.
+ *  Disini kita membuat sambungan ke database
  */
 @Database(entities = [Item::class], version = 1, exportSchema = false)
 abstract class InventoryDatabase : RoomDatabase() {
@@ -32,9 +32,9 @@ abstract class InventoryDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var Instance: InventoryDatabase? = null
-
+//      Get database di sini hanya mengembalikan objek InventoryDatabase yang merupakan instance dari database
         fun getDatabase(context: Context): InventoryDatabase {
-            // if the Instance is not null, return it, otherwise create a new database instance.
+            // jika masih belum ada instance yang terhubung maka .
             return Instance ?: synchronized(this) {
                 Room.databaseBuilder(context, InventoryDatabase::class.java, "item_database")
                     /**

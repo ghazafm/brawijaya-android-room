@@ -22,6 +22,10 @@ import androidx.room.PrimaryKey
 /**
  * Entity data class represents a single row in the database.
  */
+
+/**
+ * Di sini kita membuat class object item
+ */
 @Entity(tableName = "items")
 data class Item(
     @PrimaryKey(autoGenerate = true)
